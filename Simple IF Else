@@ -1,0 +1,81 @@
+using System.Diagnostics.CodeAnalysis;
+using static System.Console;
+namespace IfElse
+{
+class Program
+{
+	static void Main(string[] args)
+	{
+		string userInput; // local variables alive within method and then DEAD
+		double userValue1, userValue2, userValue3;
+		string signStr;
+
+		userValue1 = GetUserInput("Enter the lower bound:  ");
+		userValue2 = GetUserInput("Enter the upper bound:  ");
+		userValue3 = GetUserInput("Enter the number:  ");
+		
+		if (userValue3 > userValue1 && userValue3 < userValue2)
+		{
+		    WriteLine("{userValue3} is between {userValue1} and {userValue2}");
+		}
+		else if (userValue3 > userValue2 && userValue1 < userValue2)
+		{
+		    WriteLine("{userValue3} is between {userValue1} and {userValue2}")
+		}
+		else
+		{
+		    WriteLine("{userValue3} is  not between {userValue1} and {userValue2}");
+		}
+		
+		signStr = CheckSign(userValue1);
+		WriteLine($"{userValue1} is {signStr}.");
+		
+		signStr = CheckSign(userValue2);
+		WriteLine($"{userValue2} is {signStr}.");
+		
+		double greaterNum = GreaterNumber(userValue1, userValue2);
+		
+		WriteLine($"Between {userValue1} and {userValue2}, {greaterNum} is greater.");
+		
+		ReadLine();
+	}
+	static double GetUserInput(string prompt)
+	{
+		string userInput;
+		double userValue;
+
+		Write(prompt);
+		userValue = float.Parse(ReadLine());
+
+		return userValue;
+	}
+
+	static string CheckSign(double number)
+	{
+		if  (number > 0) //boolean expression
+		{
+			return "positive";
+		}
+		else if (number < 0)
+		{
+			return "negative";
+		}
+		else
+		{
+			return "zero";
+		}
+	}
+	
+	static double GreaterNumber(double number1, double number2)
+	{
+	    if (number1 > number2)
+	    {
+	        return number1;
+	    }
+	    else
+	    {
+	        return number2;
+	    }
+	}
+}
+}
