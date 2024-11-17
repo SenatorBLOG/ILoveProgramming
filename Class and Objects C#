@@ -1,0 +1,121 @@
+
+
+using System.Diagnostics.CodeAnalysis;
+using static System.Console;
+namespace InClass_ex_lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string userInput;
+            int lanes;
+            Motorway motorway1 = new Motorway();
+            //Motorway motorway2 = new Motorway ("Hastings", "W", 3, false, "MKW" )
+
+            Write("Enter the name of the motorway:  ");
+            motorway1.MotorwayName = ReadLine();
+
+            Write("What is the travel direction (E,W,S,N):  ");
+            motorway1.Directions = ReadLine();
+
+            Write("Is this road is Toll? (Y/N)  ");
+            motorway1.Toll = ReadLine();
+            
+            while (true) // Loop until valid input is received
+            {
+                Write("How many lanes does the road have? ");
+                if (int.TryParse(ReadLine(), out lanes))
+                {
+                    // Valid input, assign it to the property
+                    motorway1.Lanes = lanes;
+                    break; // Exit the loop
+                }
+                else
+                {
+                    WriteLine("Lanes must be an integer. Please try again."); // Prompt user again
+                }
+            }
+
+            
+            
+            WriteLine($"{motorway1.Directions} {motorway1.MotorwayName}, {motorway1.Toll}, {motorway1.Lanes}");
+            //motorway1.TollOrNot();
+        }
+
+
+    }
+    class Motorway
+    {
+        private string _motorwayname;
+        private string _directions;
+        private string _toll;
+        private int _lanes;
+        // private static string MainParty {set; get;}
+
+        // public Motorway (string motorwayName)
+        // {
+        //     LanesNumber = 2;
+        //     MainParty = "HMS";
+        // }
+        
+        public string MotorwayName
+        {
+            get {return _motorwayname;}
+            set { _motorwayname = value;}
+        }
+        
+        public string Directions
+        {
+            get {return _directions;}
+            set { _directions = DirectionsWay(value);}
+        }
+        
+        public string Toll
+        {
+            get {return _toll;}
+            set { _toll = TollOrNot(value);}
+        }
+        
+        public int Lanes
+        {
+            get {return _lanes;}
+            set { _lanes = value;}
+        }
+        
+        private string DirectionsWay(string oneDirection)
+        {
+            switch(oneDirection.ToUpper())
+            {
+                case "E":
+                    return "East";
+                case "W":
+                    return "West";
+                case "S":
+                    return "South";
+                case "N":
+                    return "North";
+                default:
+                    return "Unckhown directions";
+
+            }
+        }
+        
+        private string TollOrNot(string notToll)
+        {
+            if (notToll.ToUpper() == "Y")
+            {
+                return "Toll Road";
+            }
+            else if (notToll.ToUpper() =="N")
+            {
+                return "Free Road";
+            }
+            else
+            {
+                return "Enter Y or N";
+            }
+        }
+
+    }
+}
