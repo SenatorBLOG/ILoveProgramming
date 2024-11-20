@@ -1,0 +1,253 @@
+/* Mikhail Senatorov 300407626*/
+using System.Diagnostics.CodeAnalysis;
+using static System.Console;
+namespace Assignment5
+{
+class Program
+{
+	static void Main(string[] args)
+	{
+		const string ALLOWED_CHARACTERS = "EHLNTXZ";
+
+		string userInput = GetUserString(ALLOWED_CHARACTERS);
+
+		int dimension = GetUserInput("Enter an odd integer number greater than 2 for the dimension of the shape: ");
+
+		foreach (char ch in userInput)
+		{
+			switch(ch)
+			{
+			case 'Z':
+				DrawZ(dimension);
+ 				break;
+			case 'X':
+				DrawX(dimension);
+				break;
+			case 'T':
+				DrawT(dimension);
+				break;
+			case 'N':
+				DrawN(dimension);
+				break;
+			case 'L':
+				DrawL(dimension);
+				break;
+			case 'H':
+				DrawH(dimension);
+				break;
+			case 'E':
+				DrawE(dimension);
+				break;
+			default:
+				break;
+			}
+
+		}
+
+	}
+
+	static string GetUserString(string allowedCharacters)
+	{
+		string userInput;
+		string invalidCharacters;
+        
+		do {   
+            invalidCharacters = "";
+			WriteLine("Enter a string, including only the following characters ( EHLNTXZ ) : ");
+			userInput = ReadLine();
+
+            if (userInput == "")
+            {
+                WriteLine("You entered an empty string. Please enter valid characters.");
+            }
+            foreach (char ch in userInput)
+            {
+                if (allowedCharacters.IndexOf(char.ToUpper(ch)) == -1)
+                    invalidCharacters += ch;
+            }
+            if (invalidCharacters != "")
+            {
+                WriteLine($"Has been entered unaccepted letter ({invalidCharacters}), only EHLNTXZ characters are accepted! Re-enter your characters.");
+            }
+            
+		} while (invalidCharacters != "" || userInput == "");
+		return userInput.ToUpper();
+	}
+
+        private static int GetUserInput(string prompt)
+	{
+		int userNumber;
+		do {
+			Write($"{prompt}");
+
+			if(int.TryParse(ReadLine(),out userNumber))
+			{
+				if(userNumber > 2)
+				{
+                    if(userNumber %2 == 1)
+					{
+                        return userNumber;
+                    }
+				    WriteLine($"The {userNumber} is invalid. The number must be odd.");
+                    continue;
+				}
+				WriteLine($"The {userNumber} is invalid. The number must be greater than 2.");
+                continue;
+			}
+			WriteLine($"The input must be numeric value");
+            continue;
+
+		} while(true);
+
+	}
+
+	private static void DrawX(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (col == row || row + col - 1 == dimension)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawZ(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (row==1 || row == dimension || row + col - 1 == dimension)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawT(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (row==1 || col == (dimension/2) + 1)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawN(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (row==col || col == 1 || col == dimension)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawL(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (row == dimension || col == 1)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawH(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (col == dimension || col == 1 || row == (dimension/2) + 1)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+	private static void DrawE(int dimension)
+	{
+		WriteLine();
+		for (int row = 1; row <= dimension; row++)
+		{
+			for (int col = 1; col <= dimension; col++)
+			{
+				if (row == dimension || col == 1 || row ==1 || row == (dimension/2) + 1)
+				{
+					Write("*");
+				}
+				else
+				{
+					Write(" ");
+				}
+			}
+			WriteLine();
+		}
+		WriteLine();
+	}
+
+
+}
+}
