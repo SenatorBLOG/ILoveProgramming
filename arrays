@@ -1,0 +1,122 @@
+
+using System.Diagnostics.CodeAnalysis;
+using static System.Console;
+namespace Arrays
+
+class Program
+{
+	static void Main(string[] args)
+
+    {
+        //arrays
+        //define variables
+        int grades1 = 85;
+        int grades2 = 100;
+        int grades3 = 30;
+        int grades4 = 65;
+        int grades5 = 78;
+
+        //define (declare) arrays
+        int[] grades = {85,100, 30, 65, 78};
+        float [] lengths = new float [12]; // size and type are fixed
+        string[] names = new string[3]{"Saeed", "John","Mary"};
+
+        WriteLine("your grade is" + grades[0]);
+
+        grades[0] = 87;
+        grades[1] = 100;
+
+        int sum = grades[0] + grades[1] + grades[3];
+ 
+        WriteLine(grades[1]); // 85
+        WriteLine(grades[2]); // 100
+        WriteLine(grades[3]); // 30
+        WriteLine(grades[4]); // 65
+        WriteLine(grades[5]); // 78
+        WriteLine(grades[6]); //run time error
+        WriteLine(grades[7]); //run time error
+        WriteLine(grades[8]); //run time error
+
+        for( int i = 0; i < grades.Length; i++)
+        {
+            WriteLine(grades[i]);
+        }
+        float[] grades = new float[5];
+        string userInput;
+        float sum = 0;
+        float avg;
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            WriteLine($"Enter grade {i+1}:  ");
+            userInput = ReadLine();
+            float.TryParse(userInput, out grades[i]);
+            sum += grades[i];
+        }
+
+        avg = sum / grades.Length;
+
+        DisplayArrays(grades,avg);
+        max = FindMax(grades, out int index);
+        WriteLine($"max grade is {max} and found it at {index}.")
+
+        bool found = FindValue(grades, 100, out index);
+        if (found)
+        {
+            WriteLine($"The value was found at {index}");
+        }
+        else{
+            WriteLine($"The value was NOT found at {index}");
+        }
+        
+    }
+    static bool FindValue(float[] numbers, float val, out int index)
+    {
+        index = -1;
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            if(numbers[i] == val)
+            {
+                index = i;
+                return true;
+            }
+        }
+        //or
+        int index = 0;
+        foreach(float num in numbers)
+        {
+            if(num == val)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    static float FindMax(float[] numbers, out int iMax)
+    {
+        float max = numbers [0];
+        iMax = 0;
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            if (numbers[i] > max)
+            {
+                max = numbers[i];
+                iMax = i;
+            }
+        }
+        return max;
+    }
+
+    static void DisplayArrays(floats[] grades, float avg)
+    {
+        for (int i = 0; i < grades.Length; i++)
+        {
+            Console.WriteLine($"{grades[i],-10}{avg-grades[i],-10}");
+        }
+        //or
+        foreach (float n in grades)
+        {
+            Console.WriteLine($"{n,-10}{avg-n,-10}");
+        }
+    }
+}
