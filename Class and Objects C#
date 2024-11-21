@@ -36,9 +36,6 @@ namespace InClass_ex_lab4
                     WriteLine("Lanes must be an integer. Please try again."); // Prompt user again
                 }
             }
-
-            
-            
             WriteLine($"{motorway1.Directions} {motorway1.MotorwayName}, {motorway1.Toll}, {motorway1.Lanes}");
             //motorway1.TollOrNot();
         }
